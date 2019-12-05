@@ -390,6 +390,24 @@ TypeOrmModule.forRootAsync({
 });
 ```
 
+You can also specified a named connection with a factory function:
+
+```typescript
+TypeOrmModule.forRootAsync({
+  name: 'testConnection',
+  useFactory: () => ({
+    type: 'mysql',
+    host: 'localhost',
+    port: 3306,
+    username: 'root',
+    password: 'root',
+    database: 'test',
+    entities: [__dirname + '/**/*.entity{.ts,.js}'],
+    synchronize: true,
+  }),
+});
+```
+
 Our factory behaves like any other [asynchronous provider](https://docs.nestjs.com/fundamentals/async-providers) (e.g., it can be `async` and it's able to inject dependencies through `inject`).
 
 ```typescript
